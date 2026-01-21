@@ -15,7 +15,7 @@ import java.util.List;
  * @RequestMapping 클래스 레벨과 메서드 레벨 조합
  */
 @Controller
-@RequestMapping("/springmvc/v1/members")
+@RequestMapping("/springmvc/v2/members")
 public class SpringMemberControllerV2 {
     private MemberRepository memberRepository = MemberRepository.getInstance();
 
