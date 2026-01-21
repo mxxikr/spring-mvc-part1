@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "frontControllerServletv2", urlPatterns = "/front-controller/v2/*")
+@WebServlet(name = "frontControllerServletV2", urlPatterns = "/front-controller/v2/*")
 public class FrontControllerServletV2 extends HttpServlet {
 
     private Map<String, ControllerV2> controllerMap = new HashMap<>();
@@ -28,7 +28,7 @@ public class FrontControllerServletV2 extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("FrontControllerServletv2.service");
+        System.out.println("FrontControllerServletV2.service");
         String requestURI = request.getRequestURI();
         ControllerV2 controller = controllerMap.get(requestURI);
 
