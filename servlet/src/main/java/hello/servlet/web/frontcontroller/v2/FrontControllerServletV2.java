@@ -1,7 +1,6 @@
 package hello.servlet.web.frontcontroller.v2;
 
 import hello.servlet.web.frontcontroller.MyView;
-import hello.servlet.web.frontcontroller.v2.ControllerV2;
 import hello.servlet.web.frontcontroller.v2.controller.MemberFormControllerV2;
 import hello.servlet.web.frontcontroller.v2.controller.MemberListControllerV2;
 import hello.servlet.web.frontcontroller.v2.controller.MemberSaveControllerV2;
@@ -15,6 +14,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+//프론트 컨트롤러 패턴 V2
 @WebServlet(name = "frontControllerServletV2", urlPatterns = "/front-controller/v2/*")
 public class FrontControllerServletV2 extends HttpServlet {
 
@@ -37,7 +37,9 @@ public class FrontControllerServletV2 extends HttpServlet {
             return;
         }
 
+        //컨트롤러는 뷰 객체를 반환
         MyView view = controller.process(request, response);
+        //뷰 객체를 통해 뷰 렌더링
         view.render(request, response);
     }
 }

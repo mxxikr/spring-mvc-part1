@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+//프론트 컨트롤러 패턴 V3
 @WebServlet(name = "frontControllerServletV3", urlPatterns = "/front-controller/v3/*")
 public class FrontControllerServletV3 extends HttpServlet {
 
@@ -39,13 +40,16 @@ public class FrontControllerServletV3 extends HttpServlet {
         }
 
         Map <String, String> paramMap = createParamMap(request);
+        //컨트롤러는 서블릿 기술과 무관하게 동작
         ModelView mv = controller.process(paramMap);
 
         String viewName = mv.getViewName();
         MyView view = viewResolver(viewName);
+        //뷰 객체에 모델을 전달하여 렌더링
         view.render(mv.getModel(), request, response);
     }
 
+    //request의 파라미터를 추출해서 Map으로 변환, 컨트롤러는 서블릿 기술을 몰라도 됨
     private Map<String, String> createParamMap(HttpServletRequest request) {
         Map<String, String> paramMap = new HashMap<>();
 
@@ -54,6 +58,7 @@ public class FrontControllerServletV3 extends HttpServlet {
         return paramMap;
     }
 
+    //컨트롤러가 반환한 논리 뷰 이름을 실제 물리 뷰 경로로 변환
     private MyView viewResolver(String viewName) {
         return new MyView("/WEB-INF/views/" + viewName + ".jsp");
     }

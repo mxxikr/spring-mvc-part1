@@ -25,10 +25,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//프론트 컨트롤러 패턴 V5, 어댑터 패턴 적용
 @WebServlet(name = "frontControllerServletV5", urlPatterns = "/front-controller/v5/*")
 public class FrontControllerServletV5 extends HttpServlet {
 
-    private Map<String, Object> handlerMappingMap = new HashMap<>();
+    //핸들러 매핑 정보, 어떤 컨트롤러든 Object로 받을 수 있음
+    private final Map<String, Object> handlerMappingMap = new HashMap<>();
+    //다양한 핸들러를 처리할 수 있는 어댑터 목록
     private final List<MyHandlerAdapter> handlerAdapters = new ArrayList<>();
 
     public FrontControllerServletV5() {
@@ -55,6 +58,7 @@ public class FrontControllerServletV5 extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("FrontControllerServletV5.service");
 
+        //요청에 맞는 핸들러(컨트롤러) 조회
         Object handler = getHandler(request);
 
         if (handler == null) {
@@ -62,7 +66,9 @@ public class FrontControllerServletV5 extends HttpServlet {
             return;
         }
 
+        //핸들러를 처리할 수 있는 어댑터 조회
         MyHandlerAdapter adapter = getHandlerAdapter(handler);
+        //찾은 어댑터를 통해 핸들러 호출 및 결과(ModelView) 수신
         ModelView mv = adapter.handle(request, response, handler);
 
         MyView view = viewResolver(mv.getViewName());

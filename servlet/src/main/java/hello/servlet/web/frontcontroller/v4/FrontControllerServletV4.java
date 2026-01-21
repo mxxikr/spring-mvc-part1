@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+//프론트 컨트롤러 패턴 V4
 @WebServlet(name = "frontControllerServletV4", urlPatterns = "/front-controller/v4/*")
 public class FrontControllerServletV4 extends HttpServlet {
 
@@ -38,8 +39,10 @@ public class FrontControllerServletV4 extends HttpServlet {
         }
 
         Map<String, String> paramMap = createParamMap(request);
+        //프론트 컨트롤러가 모델 객체를 생성해서 컨트롤러에 전달
         Map<String, Object> model = new HashMap<>();
 
+        //컨트롤러는 모델 객체에 값을 담고, 뷰의 논리 이름만 반환
         String viewName = controller.process(paramMap, model);
 
         MyView view = viewResolver(viewName);
